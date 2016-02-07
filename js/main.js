@@ -100,7 +100,7 @@ function drawHRGraph(HR){
           tick: {
                 rotate: 75
           },
-          height: 130
+          height: 0
           // tick: {
           //   //format: '%Y-%m-%d'
           //   format: function(x) { 
