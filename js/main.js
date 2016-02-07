@@ -100,7 +100,7 @@ function drawHRGraph(HR){
           tick: {
                 rotate: 75
           },
-          height: 50
+          height: 60
           // tick: {
           //   //format: '%Y-%m-%d'
           //   format: function(x) { 
@@ -148,7 +148,7 @@ function drawSkinTempGraph(SkinTemp){
           tick: {
             rotate: 75
           },
-          height: 50
+          height: 60
           // tick: {
           //   //format: '%Y-%m-%d'
           //   format: function(x) { 
@@ -197,7 +197,7 @@ function drawMotionGraph(Motion){
           tick: {
                 rotate: 75
           },
-          height: 50
+          height: 60
         }
       }
       });
