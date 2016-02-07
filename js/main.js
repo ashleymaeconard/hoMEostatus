@@ -169,7 +169,16 @@ function drawMotionGraph(Motion){
 
       for(var propName_M in Motion) {
         propValue_M = Motion[propName_M]
-        Motion_values.push(propValue_M["Motion"])
+        var motion_value = propValue_M["Motion"]
+        var motion_int_value = 1
+        if (motion_value == "WALKING"){
+            Motion_values.push(2)}
+        else if (motion_value == "JOGGING"){
+            Motion_values.push(3)}
+        else if (motion_value == "RUNNING"){
+            Motion_values.push(4)}
+        else{
+            Motion_values.push(1)}
         var parts = propValue_M["TimeStamp"].split("_")
         Motion_timestamp.push(new Date(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]))
       }
