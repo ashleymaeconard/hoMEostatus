@@ -1,98 +1,56 @@
 var app = angular.module("app", ["firebase"]);
 
 $(window).load(function() {
+  var HR_values = ['Heart Rate'];
+  var Acc_values = ['Accelerometer'];
 
-  var tempChart = c3.generate({
-  	bindto: '#tempChart',
-    data: {
-      x: 'x',
-      columns: [
-        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-        ['Temperature', 30, 50, 32, 74, 50, 42],
-      ]
-    },
-    axis: {
-      x: {
-        type: 'timeseries',
-        tick: {
-          format: '%Y-%m-%d'
+  var ref = new Firebase("https://hab16-projecty.firebaseio.com/");
+    
+    ref.on(
+      "value", 
+      function(snapshot) {
+        var HR = snapshot.val().HeartRateData;
+        var Acc = snapshot.val().AccelerometerData;
+        //Heart Rate
+        for(var propName_HR in HR) {
+          propValue_HR = HR[propName_HR]
+          HR_values.push(parseInt(propValue_HR["Heart Rate"]))
         }
-      }
-    }
-  });
-
-  setTimeout(function () {
-    tempChart.load();
-  }, 1000);
-
-  var tempChart = c3.generate({
-  	bindto: '#tempChart',
-    data: {
-      x: 'x',
-      columns: [
-        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-        ['Temperature', 30, 50, 32, 74, 50, 42],
-      ]
-    },
-    axis: {
-      x: {
-        type: 'timeseries',
-        tick: {
-          format: '%Y-%m-%d'
+        //Accelerometer
+        for(var propName_Acc in Acc) {
+          propValue_Acc = Acc[propName_Acc]
+          Acc_values.push(parseInt(propValue_Acc["Accelerometer"]))
         }
-      }
-    }
-  });
+        console.log(HR_values);
+        console.log(Acc_values)
 
-  setTimeout(function () {
-    tempChart.load();
-  }, 1000);
-
-  var heartChart = c3.generate({
-  	bindto: '#heartChart',
-    data: {
-      x: 'x',
-      columns: [
-        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-        ['Heart Rate', 30, 50, 32, 74, 50, 42],
-      ]
-    },
-    axis: {
-      x: {
-        type: 'timeseries',
-        tick: {
-          format: '%Y-%m-%d'
+        //Graph Accelerometer vs. Heart Rate
+        var tempChart = c3.generate({
+        bindto: '#tempChart',
+        data: {
+          x: 'Accelerometer',
+          columns: [
+            Acc_values,
+            HR_values,
+          ]
+        },
+        axis: {
+          x: {
+            type: 'timeseries',
+            tick: {
+              format: '%Y-%m-%d'
+            }
+          }
         }
-      }
-    }
-  });
+        });
+      }, 
+      function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
 
-  setTimeout(function () {
-    heartChart.load();
-  }, 1000);
-
-  var uvChart = c3.generate({
-  	bindto: '#uvChart',
-    data: {
-      x: 'x',
-      columns: [
-        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-        ['UV Rating', 30, 50, 32, 74, 50, 42],
-      ]
-    },
-    axis: {
-      x: {
-        type: 'timeseries',
-        tick: {
-          format: '%Y-%m-%d'
-        }
-      }
-    }
-  });
-
-  setTimeout(function () {
-    uvChart.load();
-  }, 1000);
+//  Update function after so many seconds 
+//  Find a way to add points, not remake graph
+//  Emulate:  http://jsbin.com/yitep/5/edit?html,js,output
 
 });
 
