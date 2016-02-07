@@ -1,7 +1,7 @@
 var app = angular.module("app", ["firebase"]);
 
 $(window).load(function() {
-  /*var tempChart = c3.generate({
+var tempChart = c3.generate({
   	bindto: '#tempChart',
     data: {
       x: 'x',
@@ -92,6 +92,5 @@ $(window).load(function() {
   setTimeout(function () {
     uvChart.load();
   }, 1000);*/
-
 });
 
