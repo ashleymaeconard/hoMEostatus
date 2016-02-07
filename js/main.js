@@ -4,7 +4,7 @@ $(window).load(function() {
   var HR_values = ['Heart Rate'];
   var Acc_values = ['Accelerometer'];
 
-  var ref = new Firebase("https://hab16-projecty.firebaseio.com/");
+  var ref = new Firebase("https://hab16-projecta.firebaseio.com/");
     
     ref.on(
       "value", 
@@ -19,7 +19,7 @@ $(window).load(function() {
         //Accelerometer
         for(var propName_Acc in Acc) {
           propValue_Acc = Acc[propName_Acc]
-          Acc_values.push(parseInt(propValue_Acc["Accelerometer"]))
+          Acc_values.push(parseInt(propValue_Acc["AccX"]))
         }
         console.log(HR_values);
         console.log(Acc_values)
