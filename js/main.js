@@ -14,33 +14,37 @@ $(window).load(function() {
   hr_ref.on(
     "child_changed",
     function(child_snapshot, somethingelse) {
-      hr_ref.limitToLast(100).on("value", function(snapshot) {
+      hr_ref.limitToLast(50).on("value", function(snapshot) {
         drawHRGraph(snapshot)
-        console.log(snapshot.key());
+        ////console.log(snapshot.key());
       });
+      console.log("HI!")
+      for(data in child_snapshot){
+        hr_val = parseInt(propValue_HR["Heart Rate"])
+        if (hr_val > 75 || hr_val < 60) {
+          window.alert("ABNORMAL Heart Rate: " + hr_val);
+          console.error("ERROR " + hr_val)
+        }
+      }
     })
 
   skin_ref.on(
     "child_changed",
     function(child_snapshot, somethingelse) {
-      skin_ref.limitToLast(100).on("value", function(snapshot) {
+      skin_ref.limitToLast(50).on("value", function(snapshot) {
+        console.log("new child values")
         drawSkinTempGraph(snapshot)
-        console.log(snapshot.key());
+       // console.log(snapshot.key());
       });
-      for(data in child_snapshot){
-        hr_val = parseInt(propValue_HR["Heart Rate"])
-        if(val > 75 || val < 60) {
-          window.alert("ABNORMAL Heart Rate: " + hr_val);
-        }
-      }
+      
     })
 
   motion_ref.on(
     "child_changed",
     function(child_snapshot, somethingelse) {
-      motion_ref.limitToLast(100).on("value", function(snapshot) {
-        drawMotionGraph(snapshot)
-        console.log(snapshot.key());
+      motion_ref.limitToLast(50).on("value", function(snapshot) {
+       // drawMotionGraph(snapshot)
+       //// console.log(snapshot.key());
       });
     })
 
@@ -48,15 +52,16 @@ $(window).load(function() {
     "value", 
     function(snapshot) {
       var HR = snapshot.val().HeartRateData;
-      //console.log(HR)
+      ////console.log(HR)
       var Acc = snapshot.val().AccelerometerData;
       //Heart Rate
+      console.log("new value from main")
       drawHRGraph(HR)
       drawSkinTempGraph(snapshot.val().SkinTempData)
-      drawMotionGraph(snapshot.val().MotionData)
+      //drawMotionGraph(snapshot.val().MotionData)
     }, 
     function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
+     // console.log("The read failed: " + errorObject.code);
     });
 
 //  Update function after so many seconds 
@@ -81,8 +86,8 @@ function drawHRGraph(HR){
       //   propValue_Acc = Acc[propName_Acc]
       //   Acc_values.push(parseInt(propValue_Acc["AccX"]))
       // }
-      console.log(HR_values);
-      console.log(HR_timestamp)
+     // console.log(HR_values);
+     // console.log(HR_timestamp)
 
       //Graph Accelerometer vs. Heart Rate
       var tempChart = c3.generate({
@@ -105,7 +110,7 @@ function drawHRGraph(HR){
           //   //format: '%Y-%m-%d'
           //   format: function(x) { 
           //     var parts = x.split("_")
-          //     console.log(parts); 
+          //    // console.log(parts); 
           //     return new Date(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]);
           //   }
           // }
@@ -129,8 +134,8 @@ function drawSkinTempGraph(SkinTemp){
       //   propValue_Acc = Acc[propName_Acc]
       //   Acc_values.push(parseInt(propValue_Acc["AccX"]))
       // }
-      console.log(SkinTemp_timestamp);
-      console.log(SkinTemp_values)
+     // console.log(SkinTemp_timestamp);
+     // console.log(SkinTemp_values)
 
       //Graph Accelerometer vs. Heart Rate
       var tempChart = c3.generate({
@@ -153,7 +158,7 @@ function drawSkinTempGraph(SkinTemp){
           //   //format: '%Y-%m-%d'
           //   format: function(x) { 
           //     var parts = x.split("_")
-          //     console.log(parts); 
+          //    // console.log(parts); 
           //     return new Date(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5]);
           //   }
           // }
@@ -187,8 +192,8 @@ function drawMotionGraph(Motion){
       //   propValue_Acc = Acc[propName_Acc]
       //   Acc_values.push(parseInt(propValue_Acc["AccX"]))
       // }
-      console.log(Motion_timestamp);
-      console.log(Motion_values)
+     // console.log(Motion_timestamp);
+     // console.log(Motion_values)
 
       //Graph Accelerometer vs. Heart Rate
       var tempChart = c3.generate({
