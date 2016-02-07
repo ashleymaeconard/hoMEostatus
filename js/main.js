@@ -29,7 +29,7 @@ $(window).load(function() {
       });
       for(data in child_snapshot){
         hr_val = parseInt(propValue_HR["Heart Rate"])
-        if(val > 120 || val < 60) {
+        if(val > 75 || val < 60) {
           window.alert("ABNORMAL Heart Rate: " + hr_val);
         }
       }
